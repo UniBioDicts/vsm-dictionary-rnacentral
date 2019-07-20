@@ -200,7 +200,7 @@ module.exports = class DictionaryRNAcentral extends Dictionary {
 
   prepareMatchStringSearchURL(str, options) {
     let url = this.urlGetMatches
-      .replace('$queryString', fixedEncodeURIComponent(str))
+      .replace('$queryString', fixedEncodeURIComponent(str + '*'))
       + '&fields=' + fixedEncodeURIComponent(this.rnacentralFields);
 
     // add size and start URL parameters

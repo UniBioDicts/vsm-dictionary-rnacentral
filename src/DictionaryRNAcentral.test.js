@@ -215,7 +215,7 @@ describe('DictionaryRNAcentral.js', () => {
   describe('prepareMatchStringSearchURL', () => {
     it('returns proper URL', cb => {
       const url1 = dict.prepareMatchStringSearchURL(melanomaStr, {});
-      const expectedURL = testURLBase + '?query=melanoma&fields=id%2Cname%2Cdescription%2Cgene%2Cgene_synonym%2Cactive%2Cexpert_db%2Crna_type%2Cspecies';
+      const expectedURL = testURLBase + '?query=melanoma%2A&fields=id%2Cname%2Cdescription%2Cgene%2Cgene_synonym%2Cactive%2Cexpert_db%2Crna_type%2Cspecies';
       const paginationURLPart1 = '&size=50&start=0';
       const formatURLPart = '&format=json';
 
