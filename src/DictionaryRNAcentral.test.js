@@ -251,6 +251,24 @@ describe('DictionaryRNAcentral.js', () => {
     });
   });
 
+  describe('getExtendedSearchString', () => {
+    it('returns proper (extended) search string', cb => {
+      dict.getExtendedSearchString('').should.equal('');
+      dict.getExtendedSearchString('a').should.equal('a');
+      dict.getExtendedSearchString('ab').should.equal('ab');
+      dict.getExtendedSearchString(' ab  ').should.equal('ab');
+
+      dict.getExtendedSearchString('abc').should.equal('abc*');
+      dict.getExtendedSearchString('abc and h').should.equal('abc* AND h');
+      dict.getExtendedSearchString('abc or hi').should.equal('abc* OR hi');
+      dict.getExtendedSearchString('abc and hiv').should.equal('abc* AND hiv*');
+      dict.getExtendedSearchString('   abc   and  hiv ').should.equal('abc* AND hiv*');
+      dict.getExtendedSearchString('  abc an  hiv').should.equal('abc* an hiv*');
+
+      cb();
+    });
+  });
+
   describe('sortEntries', () => {
     it('sorts VSM entry objects as specified in the documentation', cb => {
       const arr = [

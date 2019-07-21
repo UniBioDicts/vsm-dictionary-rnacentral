@@ -66,7 +66,7 @@ module.exports = class DictionaryRNAcentral extends Dictionary {
   }
 
   getEntryMatchesForString(str, options, cb) {
-    if (!str) return cb(null, {items: []});
+    if ((!str) || (str.trim() === '')) return cb(null, {items: []});
 
     const url = this.prepareMatchStringSearchURL(str, options);
 
@@ -199,8 +199,9 @@ module.exports = class DictionaryRNAcentral extends Dictionary {
   }
 
   prepareMatchStringSearchURL(str, options) {
+    let searchStr = this.getExtendedSearchString(str);
     let url = this.urlGetMatches
-      .replace('$queryString', fixedEncodeURIComponent(str + '*'))
+      .replace('$queryString', fixedEncodeURIComponent(searchStr))
       + '&fields=' + fixedEncodeURIComponent(this.rnacentralFields);
 
     // add size and start URL parameters
@@ -223,6 +224,30 @@ module.exports = class DictionaryRNAcentral extends Dictionary {
 
     url += '&format=' + this.ebiSearchFormat;
     return url;
+  }
+
+  getExtendedSearchString(str) {
+    let words = str.trim().split(' ');
+
+    // and => AND, or => OR, (ab) => (ab), (abc) => (abc*)
+    let changedWords = [];
+    for (let word of words) {
+      if (word === '') continue;
+
+      if (word.toLowerCase() === 'and') {
+        changedWords.push('AND');
+        continue;
+      }
+
+      if (word.toLowerCase() === 'or') {
+        changedWords.push('OR');
+        continue;
+      }
+
+      (word.length < 3) ? changedWords.push(word) : changedWords.push(word + '*');
+    }
+
+    return changedWords.join(' ');
   }
 
   buildTerms(name, gene, geneSynonyms) {
