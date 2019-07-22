@@ -13,6 +13,7 @@ module.exports = class DictionaryRNAcentral extends Dictionary {
     this.ebiSearchRestURL = 'https://www.ebi.ac.uk/ebisearch/ws/rest/';
     this.ebiSearchDomain  = 'rnacentral';
     this.ebiSearchMaxPageSize = 100;
+    this.ebiSearchMinStart    = 0;
     this.ebiSearchMaxStart    = 1000000;
     this.ebiSearchFormat  = opt.format || 'json';
 
@@ -191,7 +192,7 @@ module.exports = class DictionaryRNAcentral extends Dictionary {
         else
           url += '&start=' + (this.ebiSearchMaxStart - 1);
       } else
-        url += '&start=0';
+        url += '&start=' + this.ebiSearchMinStart;
     }
 
     url += '&format=' + this.ebiSearchFormat;
@@ -220,7 +221,7 @@ module.exports = class DictionaryRNAcentral extends Dictionary {
       else
         url += '&start=' + (this.ebiSearchMaxStart - 1);
     } else
-      url += '&start=0';
+      url += '&start=' + this.ebiSearchMinStart;
 
     url += '&format=' + this.ebiSearchFormat;
     return url;
