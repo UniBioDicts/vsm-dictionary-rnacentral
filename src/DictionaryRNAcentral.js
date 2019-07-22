@@ -234,13 +234,15 @@ module.exports = class DictionaryRNAcentral extends Dictionary {
     for (let word of words) {
       if (word === '') continue;
 
-      if (word.toLowerCase() === 'and') {
+      let w = word.toLowerCase();
+      if (w === 'and') {
         changedWords.push('AND');
         continue;
-      }
-
-      if (word.toLowerCase() === 'or') {
+      } else if (w === 'or') {
         changedWords.push('OR');
+        continue;
+      } else if (w === 'not') {
+        changedWords.push('NOT');
         continue;
       }
 

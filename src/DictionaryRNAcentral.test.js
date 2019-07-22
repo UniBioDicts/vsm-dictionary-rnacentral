@@ -261,6 +261,7 @@ describe('DictionaryRNAcentral.js', () => {
       dict.getExtendedSearchString('abc').should.equal('abc*');
       dict.getExtendedSearchString('abc and h').should.equal('abc* AND h');
       dict.getExtendedSearchString('abc or hi').should.equal('abc* OR hi');
+      dict.getExtendedSearchString('abc not hi').should.equal('abc* NOT hi');
       dict.getExtendedSearchString('abc and hiv').should.equal('abc* AND hiv*');
       dict.getExtendedSearchString('   abc   and  hiv ').should.equal('abc* AND hiv*');
       dict.getExtendedSearchString('  abc an  hiv').should.equal('abc* an hiv*');
