@@ -90,7 +90,7 @@ From the above URL, we provide a brief description for each sub-part:
 - The second part refers to the **domain** of search (*rnacentral*)
 - The third part refers to the *entry* endpoint (which allows us to request 
 for entry information associated with entry identifiers)
-- The fourth part is the *entry IDs*, comma seperated (we extract the last part 
+- The fourth part is the *entry IDs*, comma separated (we extract the last part 
 of the RNAcentral-specific URI for each ID)
 - The fifth part is the *fields* of interest - i.e. the information related to 
 the entries that we will map to VSM-entry properties. For a complete list of the 
