@@ -68,7 +68,7 @@ This specification relates to the function:
 
 Since `vsm-dictionary-rnacentral` has only one sub-dictionary
 (it's a uni-dictionary!), `getDictInfos` returns a static object with properties:
-- `id`: https://www.rnacentral.org (will be used as a `dictID`)
+- `id`: 'https://www.rnacentral.org' (will be used as a `dictID`)
 - `abbrev`: 'RNAcentral'
 - `name`: 'RNAcentral'
 
