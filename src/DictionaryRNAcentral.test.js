@@ -1,7 +1,6 @@
 const DictionaryRNAcentral = require('./DictionaryRNAcentral');
 const chai = require('chai'); chai.should();
 const expect = chai.expect;
-const nock = require('nock');
 const fs = require('fs');
 const path = require('path');
 
@@ -20,34 +19,88 @@ describe('DictionaryRNAcentral.js', () => {
   const getIDStr = fs.readFileSync(getIDPath, 'utf8');
   const getMatchesForMelanomaStr = fs.readFileSync(getMelanomaPath, 'utf8');
 
-  before(() => {
-    nock.disableNetConnect();
-  });
-
-  afterEach(() => {
-    nock.cleanAll();
-  });
-
-  after(() => {
-    nock.enableNetConnect();
-  });
-
   describe('getDictInfos', () => {
-    it('returns proper RNAcentral dictInfo object', cb => {
-
-      dict.getDictInfos({}, (err, res) => {
-        expect(err).to.be.null;
-        res.should.deep.equal({
-          items: [
-            {
-              id: 'https://www.rnacentral.org',
-              abbrev: 'RNAcentral',
-              name: 'RNAcentral'
-            }
-          ]
-        });
+    it('returns empty result when the list of dictIDs does not '
+      + ' include the domain\'s dictID', cb => {
+      dict.getDictInfos({ filter: { id: [
+        ' ',
+        'https://www.uniprot.org',
+        'https://www.ensemblgenomes.org' ]}},
+      (err, res) => {
+        expect(err).to.equal(null);
+        res.should.deep.equal({ items: [] });
         cb();
       });
+    });
+
+    it('returns proper dictInfo object when `options.filter` is not properly ' +
+      'defined or the domain\'s dictID is in the list of specified dictIDs', cb => {
+      let expectedResult = { items: [
+        {
+          id: 'https://www.rnacentral.org',
+          abbrev: 'RNAcentral',
+          name: 'RNAcentral'
+        }
+      ]};
+
+      dict.getDictInfos({}, (err, res) => {
+        expect(err).to.equal(null);
+        res.should.deep.equal(expectedResult);
+      });
+
+      dict.getDictInfos({ filter: { id: [
+        'http://www.ensemblgenomes.org',
+        'https://www.ebi.ac.uk/complexportal',
+        'https://www.rnacentral.org' ]}},
+      (err, res) => {
+        expect(err).to.equal(null);
+        res.should.deep.equal(expectedResult);
+      });
+
+      cb();
+    });
+  });
+
+  describe('getEntries', () => {
+    it('returns empty result when the `options.filter.dictID` is properly ' +
+      'defined and in the list of dictIDs the domain\'s dictID is not included', cb => {
+      dict.getEntries({filter: { dictID: ['']}}, (err, res) => {
+        expect(err).to.equal(null);
+        res.should.deep.equal({ items: [] });
+      });
+
+      dict.getEntries({filter: { dictID: [
+        ' ',
+        'https://www.uniprot.org',
+        'http://www.ensemblgenomes.org'
+      ]}}, (err, res) => {
+        expect(err).to.equal(null);
+        res.should.deep.equal({ items: [] });
+      });
+
+      cb();
+    });
+  });
+
+  describe('getEntryMatchesForString', () => {
+    it('returns empty result when the `options.filter.dictID` is properly ' +
+      'defined and in the list of dictIDs the domain\'s dictID is not included', cb => {
+      dict.getEntryMatchesForString(melanomaStr, {filter: { dictID: ['']}},
+        (err, res) => {
+          expect(err).to.equal(null);
+          res.should.deep.equal({ items: [] });
+        });
+
+      dict.getEntryMatchesForString(melanomaStr, {filter: { dictID: [
+        ' ',
+        'https://www.uniprot.org',
+        'http://www.ensemblgenomes.org']}},
+      (err, res) => {
+        expect(err).to.equal(null);
+        res.should.deep.equal({ items: [] });
+      });
+
+      cb();
     });
   });
 

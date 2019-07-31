@@ -66,16 +66,24 @@ documentation for the API here: https://www.ebi.ac.uk/ebisearch/documentation.eb
 This specification relates to the function:  
  `getDictInfos(options, cb)`
 
-Since `vsm-dictionary-rnacentral` has only one sub-dictionary
-(it's a uni-dictionary!), `getDictInfos` returns a static object with properties:
+If the `options.filter.id` is not properly defined 
+or the `https://www.rnacentral.org` dictID is included in the 
+list of ids used for filtering, `getDictInfos` returns a static object 
+with the following properties:
 - `id`: 'https://www.rnacentral.org' (will be used as a `dictID`)
 - `abbrev`: 'RNAcentral'
 - `name`: 'RNAcentral'
+
+Otherwise, an empty result is returned.
 
 ### Map RNAcentral to Entry VSM object
 
 This specification relates to the function:  
  `getEntries(options, cb)`
+
+Firstly, if the `options.filter.dictID` is properly defined and in the list of 
+dictIDs the `https://www.rnacentral.org` dictID is not included, then 
+an **empty array** of entry objects is returned.
 
 If the `options.filter.id` is properly defined (with IDs like
 `https://www.rnacentral.org/rna/URS0000301B08_9606` - note that all RNAcentral 
@@ -140,8 +148,12 @@ RNAcentral field | Type | Required | VSM entry/match object property | Notes
 This specification relates to the function:  
  `getEntryMatchesForString(str, options, cb)`
 
-An example of a URL string that is being built and send to the EBI Search's REST 
-API when requesting for `tp53`, is:
+Firstly, if the `options.filter.dictID` is properly defined and in the list of 
+dictIDs the `https://www.rnacentral.org` dictID is not included, then 
+an **empty array** of match objects is returned.
+
+Otherwise, an example of a URL string that is being built and send to the EBI 
+Search's REST API when requesting for `tp53`, is:
 ```
 https://www.ebi.ac.uk/ebisearch/ws/rest/rnacentral?query=tp53%2A&fields=id%2Cname%2Cdescription%2Cgene%2Cgene_synonym%2Cactive%2Cexpert_db%2Crna_type%2Cspecies&size=20&start=0&format=json
 ```
