@@ -174,7 +174,8 @@ module.exports = class DictionaryRNAcentral extends Dictionary {
       // all IDs
       url = url
         .replace('/entry/$ids', '?query=domain_source:' + this.ebiSearchDomain)
-        + '&fields=' + fixedEncodeURIComponent(this.rnacentralFields);
+        + '&fields=' + fixedEncodeURIComponent(this.rnacentralFields)
+        + '&sort=id';
 
       // add size and start URL parameters
       let pageSize = this.perPageDefault;

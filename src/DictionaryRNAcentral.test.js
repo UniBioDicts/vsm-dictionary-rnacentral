@@ -177,22 +177,23 @@ describe('DictionaryRNAcentral.js', () => {
         ]}, page: -1, perPage: 101 });
 
       const getAllIDsURLPart = 'domain_source:rnacentral';
+      const sortURLPart = '&sort=id';
       const formatURLPart = '&format=json';
       const URLfields = 'fields=id%2Cname%2Cdescription%2Cgene%2Cgene_synonym%2Cactive%2Cexpert_db%2Crna_type%2Cspecies';
       const expectedURL1 = testURLBase + '?query=' + getAllIDsURLPart
-        + '&' + URLfields + '&size=50&start=0' + formatURLPart;
+        + '&' + URLfields + sortURLPart + '&size=50&start=0' + formatURLPart;
       const expectedURL2 = testURLBase + '?query=' + getAllIDsURLPart
-        + '&' + URLfields + '&size=2&start=0' + formatURLPart;
+        + '&' + URLfields + sortURLPart + '&size=2&start=0' + formatURLPart;
       const expectedURL3 = testURLBase + '?query=' + getAllIDsURLPart
-        + '&' + URLfields + '&size=2&start=0' + formatURLPart;
+        + '&' + URLfields + sortURLPart + '&size=2&start=0' + formatURLPart;
       const expectedURL4 = testURLBase + '?query=' + getAllIDsURLPart
-        + '&' + URLfields + '&size=50&start=50' + formatURLPart;
+        + '&' + URLfields + sortURLPart + '&size=50&start=50' + formatURLPart;
       const expectedURL5 = testURLBase + '?query=' + getAllIDsURLPart
-        + '&' + URLfields + '&size=50&start=5000' + formatURLPart;
+        + '&' + URLfields + sortURLPart + '&size=50&start=5000' + formatURLPart;
       const expectedURL6 = testURLBase + '?query=' + getAllIDsURLPart
-        + '&' + URLfields + '&size=100&start=10000' + formatURLPart;
+        + '&' + URLfields + sortURLPart +'&size=100&start=10000' + formatURLPart;
       const expectedURL7 = testURLBase + '?query=' + getAllIDsURLPart
-        + '&' + URLfields + '&size=100&start=999999' + formatURLPart;
+        + '&' + URLfields + sortURLPart + '&size=100&start=999999' + formatURLPart;
       const expectedURL8 = testURLBase + '/entry/URS0000301B08_9606'
         + '?' + URLfields + formatURLPart;
       const expectedURL9 = testURLBase + '/entry/URS0000301B08_9606,URS0000DDDDBA_720'

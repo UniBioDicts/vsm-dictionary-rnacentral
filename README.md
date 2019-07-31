@@ -97,9 +97,9 @@ the entries that we will map to VSM-entry properties. For a complete list of the
 available fields for the RNAcentral domain, see: https://www.ebi.ac.uk/ebisearch/metadata.ebi?db=rnacentral
 - The last part defines the format of the returned data (JSON)
 
-Otherwise, we ask for all ids (no particular sorting offered) with this query:
+Otherwise, we ask for all ids (by default **id sorted**) with this query:
 ```
- https://www.ebi.ac.uk/ebisearch/ws/rest/rnacentral?query=domain_source:rnacentral&fields=id%2Cname%2Cdescription%2Cgene%2Cgene_synonym%2Cactive%2Cexpert_db%2Crna_type%2Cspecies&size=5&start=0&format=json
+ https://www.ebi.ac.uk/ebisearch/ws/rest/rnacentral?query=domain_source:rnacentral&fields=id%2Cname%2Cdescription%2Cgene%2Cgene_synonym%2Cactive%2Cexpert_db%2Crna_type%2Cspecies&sort=id&size=5&start=0&format=json
 ```
 
 Note that depending on the `options.page` and `options.perPage` options 
