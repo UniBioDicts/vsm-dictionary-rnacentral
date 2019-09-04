@@ -133,8 +133,7 @@ these fields to VSM-entry specific properties:
 
 RNAcentral field | Type | Required | VSM entry/match object property | Notes  
 :---:|:---:|:---:|:---:|:---:
-`id` | Array | YES | `id` | The VSM entry id is the full URI
-`name` | Array | NO | `str`,`terms[0].str` | We use the first element only. If empty, we try taking the first element from `gene` or `gene_synonym`
+`id` | Array | YES | `id`,`str`,`terms[0].str` | The VSM entry id is the full URI, for the `str` we use just the id string
 `description` | Array | NO | `descr` | We use the first element only
 `gene` | Array | NO | `terms[i].str` | We map the whole array
 `gene_synonym` | Array | NO | `terms[i].str` | We map the whole array

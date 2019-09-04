@@ -9,7 +9,7 @@ module.exports = class DictionaryRNAcentral extends Dictionary {
 
     // RNAcentral-specific parameters
     this.rnacentralDictID = 'https://www.rnacentral.org';
-    this.rnacentralFields = 'id,name,description,gene,gene_synonym,active,expert_db,rna_type,species';
+    this.rnacentralFields = 'id,description,gene,gene_synonym,active,expert_db,rna_type,species';
     this.ebiSearchRestURL = 'https://www.ebi.ac.uk/ebisearch/ws/rest/';
     this.ebiSearchDomain  = 'rnacentral';
     this.ebiSearchMaxPageSize = 100;
@@ -126,7 +126,7 @@ module.exports = class DictionaryRNAcentral extends Dictionary {
       id: this.rnacentralDictID + '/rna/' + entry.fields.id[0],
       dictID: this.rnacentralDictID,
       descr: entry.fields.description[0],
-      terms: this.buildTerms(entry.fields.name,
+      terms: this.buildTerms(entry.fields.id[0],
         entry.fields.gene, entry.fields.gene_synonym),
       z: {
         ...((entry.fields.active.length !== 0)
@@ -155,7 +155,7 @@ module.exports = class DictionaryRNAcentral extends Dictionary {
 
   mapRNACentralResToMatchObj(res, str) {
     return res.entries.map(entry => {
-      const mainTerm = this.getMainTerm(entry.fields.name,
+      const mainTerm = this.getMainTerm(entry.fields.id[0],
         entry.fields.gene, entry.fields.gene_synonym);
       return {
         id: this.rnacentralDictID + '/rna/' + entry.fields.id[0],
@@ -163,7 +163,7 @@ module.exports = class DictionaryRNAcentral extends Dictionary {
         str: mainTerm,
         descr: entry.fields.description[0],
         type: mainTerm.startsWith(str) ? 'S' : 'T',
-        terms: this.buildTerms(entry.fields.name,
+        terms: this.buildTerms(entry.fields.id[0],
           entry.fields.gene, entry.fields.gene_synonym),
         z: {
           ...((entry.fields.active.length !== 0)
@@ -290,10 +290,10 @@ module.exports = class DictionaryRNAcentral extends Dictionary {
     return changedWords.join(' ');
   }
 
-  buildTerms(name, gene, geneSynonyms) {
+  buildTerms(id, gene, geneSynonyms) {
     let res = [];
 
-    let mainTerm = this.getMainTerm(name, gene, geneSynonyms);
+    let mainTerm = this.getMainTerm(id, gene, geneSynonyms);
     res.push({ str: mainTerm });
 
     let synonyms = removeDuplicates(gene.concat(geneSynonyms));
@@ -305,12 +305,12 @@ module.exports = class DictionaryRNAcentral extends Dictionary {
     return res;
   }
 
-  getMainTerm(name, gene, geneSynonyms) {
-    if (name.length !== 0)
-      return name[0];
-    else if (gene.length !== 0)
+  getMainTerm(id, gene, geneSynonyms) {
+    if (typeof id !== 'undefined')
+      return id;
+    else if (gene.length !== 0) // should never happen, there is always an id!
       return gene[0];
-    else // worst case, should never happen
+    else // worst case, definitively should never happen
       return geneSynonyms[0];
   }
 
