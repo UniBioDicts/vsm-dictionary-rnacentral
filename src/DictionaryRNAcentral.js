@@ -43,29 +43,16 @@ module.exports = class DictionaryRNAcentral extends Dictionary {
     if (!this.hasProperFilterIDProperty(options)) {
       return cb(null, res);
     } else {
-      // keep only the domain-specific dictID(s)
-      let idList = options.filter.id.filter(dictID =>
-        dictID.trim() === this.rnacentralDictID
-      );
-
-      if (idList.length === 0) {
-        return cb(null, {items: []});
-      } else {
-        return cb(null, res);
-      }
+      return (options.filter.id.includes(this.rnacentralDictID))
+        ? cb(null, res)
+        : cb(null, { items: [] });
     }
   }
 
   getEntries(options, cb) {
-    if (this.hasProperFilterDictIDProperty(options)) {
-      // keep only the domain-specific dictID(s)
-      let idList = options.filter.dictID.filter(dictID =>
-        dictID.trim() === this.rnacentralDictID
-      );
-
-      if (idList.length === 0) {
-        return cb(null, { items: [] });
-      }
+    if (this.hasProperFilterDictIDProperty(options)
+      && !options.filter.dictID.includes(this.rnacentralDictID)) {
+      return cb(null, { items: [] });
     }
 
     const url = this.prepareEntrySearchURL(options);
@@ -95,15 +82,9 @@ module.exports = class DictionaryRNAcentral extends Dictionary {
   getEntryMatchesForString(str, options, cb) {
     if ((!str) || (str.trim() === '')) return cb(null, {items: []});
 
-    if (this.hasProperFilterDictIDProperty(options)) {
-      // keep only the domain-specific dictID(s)
-      let idList = options.filter.dictID.filter(dictID =>
-        dictID.trim() === this.rnacentralDictID
-      );
-
-      if (idList.length === 0) {
-        return cb(null, { items: [] });
-      }
+    if (this.hasProperFilterDictIDProperty(options)
+      && !options.filter.dictID.includes(this.rnacentralDictID)) {
+      return cb(null, { items: [] });
     }
 
     const url = this.prepareMatchStringSearchURL(str, options);
