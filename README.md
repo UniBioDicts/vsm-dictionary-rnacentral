@@ -61,6 +61,18 @@ In the next sections we will explain the mapping between the data
 offered by EBI Search's API and the corresponding VSM objects. Find the 
 documentation for the API here: https://www.ebi.ac.uk/ebisearch/documentation.ebi
 
+Note that if we receive an error response from the EBI Search servers (see the 
+URL requests for `getEnties` and `getEntryMatchesForString` below) that is not a
+JSON string that we can parse, we formulate the error as a JSON object ourselves 
+in the following format:
+```
+{
+  status: <number>,
+  error: <response> 
+}
+```
+where the *response* from the server is JSON stringified.
+
 ### Map RNAcentral to DictInfo VSM object
 
 This specification relates to the function:  
@@ -93,7 +105,7 @@ IDs must have the species taxonomy ID attached) then we use a query like this:
 https://www.ebi.ac.uk/ebisearch/ws/rest/rnacentral/entry/URS0000301B08_9606,URS0000DDDDBA_720,URS0000000001_77133,URS0000A8C125_9606?fields=id%2Cname%2Cdescription%2Cgene%2Cgene_synonym%2Cactive%2Cexpert_db%2Crna_type%2Cspecies&format=json
 ```
 
-From the above URL, we provide a brief description for each sub-part: 
+For the above URL, we provide a brief description for each sub-part: 
 - The first part refers to the EBI Search's main REST endpoint: https://www.ebi.ac.uk/ebisearch/ws/rest/
 - The second part refers to the **domain** of search (*rnacentral*)
 - The third part refers to the *entry* endpoint (which allows us to request 

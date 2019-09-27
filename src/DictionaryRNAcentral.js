@@ -1,5 +1,6 @@
 const Dictionary = require('vsm-dictionary');
-const { getLastPartOfURL, fixedEncodeURIComponent, removeDuplicates } = require('./fun');
+const { getLastPartOfURL, fixedEncodeURIComponent,
+  removeDuplicates, isJSONString } = require('./fun');
 
 module.exports = class DictionaryRNAcentral extends Dictionary {
 
@@ -392,8 +393,13 @@ module.exports = class DictionaryRNAcentral extends Dictionary {
     const req = this.getReqObj();
     req.onreadystatechange = function () {
       if (req.readyState === 4) {
-        if (req.status !== 200)
-          cb(JSON.parse(req.responseText));
+        if (req.status !== 200) {
+          let response = req.responseText;
+          isJSONString(response)
+            ? cb(JSON.parse(response))
+            : cb(JSON.parse('{ "status": ' + req.status
+            + ', "error": ' + JSON.stringify(response) + '}'));
+        }
         else {
           try {
             const response = JSON.parse(req.responseText);

@@ -1,5 +1,6 @@
 module.exports = { getLastPartOfURL, fixedEncodeURIComponent,
-  getElementsInParentheses, getStringBeforeFirstSeparator, removeDuplicates };
+  getElementsInParentheses, getStringBeforeFirstSeparator,
+  removeDuplicates, isJSONString };
 
 function getLastPartOfURL(entryId) {
   return entryId.split('/').pop();
@@ -31,4 +32,13 @@ function getStringBeforeFirstSeparator(str, sep) {
 
 function removeDuplicates(arr) {
   return [...new Set(arr)];
+}
+
+function isJSONString(str) {
+  try {
+    let json = JSON.parse(str);
+    return (json && typeof json === 'object');
+  } catch (e) {
+    return false;
+  }
 }
