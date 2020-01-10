@@ -1,6 +1,6 @@
 {
   "name": "vsm-dictionary-rnacentral",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Implementation of a VSM-dictionary that uses the EBI search RESTful Web Services to interact with the RNAcentral database",
   "main": "src/DictionaryRNAcentral.js",
   "scripts": {
@@ -32,8 +32,8 @@
     "mocha": "^5.2.0",
     "text-transform-loader": "^2.0.0",
     "clean-webpack-plugin": "^1.0.1",
-    "copy-webpack-plugin": "^4.6.0",
-    "terser-webpack-plugin": "^1.2.1",
+    "copy-webpack-plugin": "^5.1.1",
+    "terser-webpack-plugin": "^2.3.1",
     "webpack": "^4.29.0",
     "webpack-cli": "^3.2.1",
     "webpack-dev-server": "^3.1.14",
