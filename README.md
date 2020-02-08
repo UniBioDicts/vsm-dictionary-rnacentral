@@ -195,3 +195,7 @@ efficient multiple term search:
 
 Note that multiple search terms separated by white spaces are combined by default 
 in AND logic.
+
+## License
+
+This project is licensed under the AGPL license - see [LICENSE.md](LICENSE.md).
