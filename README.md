@@ -2,8 +2,10 @@
 
 <!-- badges: start -->
 [![Build Status](https://travis-ci.com/UniBioDicts/vsm-dictionary-rnacentral.svg?branch=master)](https://travis-ci.com/UniBioDicts/vsm-dictionary-rnacentral)
+[![codecov](https://codecov.io/gh/UniBioDIcts/vsm-dictionary-rnacentral/branch/master/graph/badge.svg)](https://codecov.io/gh/UniBioDIcts/vsm-dictionary-rnacentral)
 [![npm version](https://img.shields.io/npm/v/vsm-dictionary-rnacentral)](https://www.npmjs.com/package/vsm-dictionary-rnacentral)
 [![Downloads](https://img.shields.io/npm/dm/vsm-dictionary-rnacentral)](https://www.npmjs.com/package/vsm-dictionary-rnacentral)
+[![License](https://img.shields.io/npm/l/vsm-dictionary-rnacentral)](#license)
 <!-- badges: end -->
 
 ## Summary

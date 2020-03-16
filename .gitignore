@@ -9,3 +9,5 @@ secret*
 *.lnk
 *.sublime*
 _book/
+.nyc_output/
+coverage/
