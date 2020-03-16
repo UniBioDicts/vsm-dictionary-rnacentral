@@ -15,6 +15,10 @@ the [EBI Search RESTful Web Services](https://www.ebi.ac.uk/ebisearch/apidoc.ebi
 to interact with the RNAcentral database and translate the provided RNA data 
 into a VSM-specific format.
 
+## Install
+
+Run: `npm install`
+
 ## Example use
 
 Create a `test.js` file and include this code:
