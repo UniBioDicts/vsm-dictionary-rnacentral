@@ -20,7 +20,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vsmjs/vsm-dictionary-rnacentral"
+    "url": "git+https://github.com/UniBioDicts/vsm-dictionary-rnacentral"
   },
   "author": "John Zobolas",
   "license": "AGPL-3.0",
