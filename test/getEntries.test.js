@@ -12,7 +12,7 @@ dict.getEntries({
     id: [
       'https://www.rnacentral.org/rna/URS0000301B08_9606',
       'https://www.rnacentral.org/rna/URS0000DDDDBA_720',
-      'https://www.rnacentral.org/rna/URS0000000001_77133',
+      'https://www.rnacentral.org/rna/URS0000772E1D_1458438',
       'https://www.rnacentral.org/rna/URS0000A8C125_9606',
     ]},
   sort: 'str',
