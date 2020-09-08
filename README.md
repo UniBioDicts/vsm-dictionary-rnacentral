@@ -12,7 +12,7 @@
 
 `vsm-dictionary-rnacentral` is an implementation 
 of the 'VsmDictionary' parent-class/interface (from the package
-[`vsm-dictionary`](https://github.com/vsmjs/vsm-dictionary)), that uses 
+[`vsm-dictionary`](https://github.com/vsm/vsm-dictionary)), that uses 
 the [EBI Search RESTful Web Services](https://www.ebi.ac.uk/ebisearch/apidoc.ebi) 
 to interact with the RNAcentral database and translate the provided RNA data 
 into a VSM-specific format.
@@ -68,7 +68,7 @@ header of an HTML file.
 
 Like all VsmDictionary subclass implementations, this package follows
 the parent class
-[specification](https://github.com/vsmjs/vsm-dictionary/blob/master/Dictionary.spec.md).
+[specification](https://github.com/vsm/vsm-dictionary/blob/master/Dictionary.spec.md).
 In the next sections we will explain the mapping between the data 
 offered by EBI Search's API and the corresponding VSM objects. Find the 
 documentation for the API here: https://www.ebi.ac.uk/ebisearch/documentation.ebi
