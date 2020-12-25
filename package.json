@@ -1,6 +1,6 @@
 {
   "name": "vsm-dictionary-rnacentral",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Implementation of a VSM-dictionary that uses the EBI search RESTful Web Services to interact with the RNAcentral database",
   "main": "src/DictionaryRNAcentral.js",
   "scripts": {
